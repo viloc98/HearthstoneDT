@@ -1,0 +1,41 @@
+{% extends 'blank_template.html' %}
+{% block content %}
+  <div class="w3-container" style="margin-top:80px" id="expansions div">
+    <h1 class="w3-jumbo"><b>Cards</b></h1>
+    <h1 class="w3-xxxlarge w3-text-red"><b>Filter by expansion</b></h1>
+      <table>
+          <tr>
+              <td>
+                  <div class="w3-row-padding">
+                    <div class="w3-half">
+                      <img src="https://dotesports-media.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/2019/03/19153220/HS_RiseOfShadows_Logo.png" style="width:400px;height: 300px" onclick="onClick(this)" alt="Logo Rise of shadows">
+                  </div>
+                  </div>
+              </td>
+              <td>
+                  <div class="w3-row-padding">
+                    <div class="w3-half">
+                        <img src="https://gamepedia.cursecdn.com/hearthstone_gamepedia/1/18/Rastakhan%27s_Rumble_logo.png" style="width:400px;height: 300px" onclick="onClick(this)" alt="Logo Rastakhan's rumble">
+                  </div>
+                  </div>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <div class="w3-row-padding">
+                    <div class="w3-half">
+                      <img src="https://gamepedia.cursecdn.com/hearthstone_gamepedia/thumb/8/86/The_Boomsday_Project_logo.png/1200px-The_Boomsday_Project_logo.png" style="width:400px;height: 300px" onclick="onClick(this)" alt="Logo Boomsday">
+                  </div>
+                  </div>
+              </td>
+              <td>
+                  <div class="w3-row-padding">
+                    <div class="w3-half">
+                        <img src="https://gamepedia.cursecdn.com/hearthstone_gamepedia/a/a2/The_Witchwood_logo.png" style="width:400px;height: 250px" onclick="onClick(this)" alt="Logo Witchwood">
+                  </div>
+                  </div>
+              </td>
+          </tr>
+      </table>
+  <h1 class="w3-xxxlarge w3-text-red"><b>Show all cards</b></h1>
+{% endblock %}
