@@ -1,7 +1,50 @@
 {% extends 'blank_template.html' %}
 {% block content %}
-  <div class="w3-container" style="margin-top:80px" id="expansions div">
+    <div class="w3-container" style="margin-top:80px" id="expansions div">
     <h1 class="w3-jumbo"><b>Decks</b></h1>
-    <h1 class="w3-xxxlarge w3-text-red"><b>Your decks</b></h1>
-    <p>Your decks will be here</p>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+        }
+
+        table, td {
+            border: 1px solid black;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+
+    </style>
+
+    <table>
+        <tr>
+            <td height="40px" width="100%" colspan="3" class="w3-red">Your decks</td>
+        </tr>
+        <tr>
+            <td style="border-bottom-width: 0px; height: 100px;"><img src="https://art.hearthstonejson.com/v1/256x/HERO_03a.jpg"></td>
+            <td style="border-bottom-width: 0px; height: 100px;">Prova</td>
+            <td style="border-bottom-width: 0px; height: 100px;">Prova</td>
+        </tr>
+        <tr>
+            <td style="border-top-width: 0px">Mech picaro</td>
+            <td style="border-top-width: 0px">Prova</td>
+            <td style="border-top-width: 0px">Prova</td>
+        </tr>
+                <tr>
+            <td style="border-bottom-width: 0px; height: 100px;"><img src="https://art.hearthstonejson.com/v1/256x/HERO_03a.jpg"></td>
+            <td style="border-bottom-width: 0px; height: 100px;">Prova</td>
+            <td style="border-bottom-width: 0px; height: 100px;">Prova</td>
+        </tr>
+        <tr>
+            <td style="border-top-width: 0px">Mech picaro</td>
+            <td style="border-top-width: 0px">Prova</td>
+            <td style="border-top-width: 0px">Prova</td>
+        </tr>
+    </table>
+    </div>
 {% endblock %}
