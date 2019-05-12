@@ -11,40 +11,24 @@
 
         table, td {
             border: 1px solid black;
+            padding: 10px;
+            vertical-align:middle;
         }
 
         img {
             width: 100px;
             height: 100px;
         }
-
-
     </style>
-
     <table>
         <tr>
             <td height="40px" width="100%" colspan="3" class="w3-red">Your decks</td>
         </tr>
-        <tr>
-            <td style="border-bottom-width: 0px; height: 100px;"><img src="https://art.hearthstonejson.com/v1/256x/HERO_03a.jpg"></td>
-            <td style="border-bottom-width: 0px; height: 100px;">Prova</td>
-            <td style="border-bottom-width: 0px; height: 100px;">Prova</td>
-        </tr>
-        <tr>
-            <td style="border-top-width: 0px">Mech picaro</td>
-            <td style="border-top-width: 0px">Prova</td>
-            <td style="border-top-width: 0px">Prova</td>
-        </tr>
+                {% for deck in decks %}
                 <tr>
-            <td style="border-bottom-width: 0px; height: 100px;"><img src="https://art.hearthstonejson.com/v1/256x/HERO_03a.jpg"></td>
-            <td style="border-bottom-width: 0px; height: 100px;">Prova</td>
-            <td style="border-bottom-width: 0px; height: 100px;">Prova</td>
-        </tr>
-        <tr>
-            <td style="border-top-width: 0px">Mech picaro</td>
-            <td style="border-top-width: 0px">Prova</td>
-            <td style="border-top-width: 0px">Prova</td>
-        </tr>
+                    <td style="border-bottom-width: 0px; height: 100px;"><img align="left" src="{{deck.image}}"><h5>{{ deck.name }}</h5></td>
+                </tr>
+                {% endfor %}
     </table>
     </div>
 {% endblock %}

@@ -38,6 +38,7 @@ class Deck(models.Model):
     description = models.CharField("Description", max_length=2000, default="")
     playerClass = models.IntegerField("Player Class", choices=CLASSES)
     deckString = models.CharField("Deck String", max_length=500)
+    image = models.CharField("Image", max_length=2000, default="")
 
     def __str__(self):
         return self.name

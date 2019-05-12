@@ -1,12 +1,14 @@
 import requests
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.template import loader
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 
-from HSDT.models import Cards
+from HSDT.models import Cards, Deck
 
 
 def index(request):
@@ -53,7 +55,14 @@ def cards(request):
 
 @login_required(login_url='/HSDT/accounts/login')
 def decks(request):
-    return render(request, 'decks.html')
+    # getting our template
+    template = loader.get_template('decks.html')
+
+    decks = Deck.objects.all();
+    context = {'decks': decks}
+
+    # rendering the template in HttpResponse
+    return HttpResponse(template.render(context))
 
 
 class ViewCards(ListView):
