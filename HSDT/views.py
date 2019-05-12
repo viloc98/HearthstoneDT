@@ -1,14 +1,17 @@
 import requests
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
 from django.views.decorators.csrf import csrf_exempt
 
+from HSDT.forms import DeckForm
 from HSDT.models import Cards, Deck
 
 
@@ -69,9 +72,7 @@ def decks(request):
 class ViewCards(ListView):
     template_name = 'all_cards.html'
     model = Cards
-    ordering = ['playerClass', 'cost']
     context_object_name = "cards"
-    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(ViewCards, self).get_context_data(**kwargs)
@@ -106,9 +107,7 @@ def card_detail(request, pk):
 class ViewWitchwoodCards(ListView):
     template_name = 'all_cards.html'
     model = Cards
-    ordering = ['playerClass', 'cost']
     context_object_name = "cards"
-    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(ViewWitchwoodCards, self).get_context_data(**kwargs)
@@ -132,9 +131,7 @@ class ViewWitchwoodCards(ListView):
 class ViewBoomsdayCards(ListView):
     template_name = 'all_cards.html'
     model = Cards
-    ordering = ['playerClass', 'cost']
     context_object_name = "cards"
-    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(ViewBoomsdayCards, self).get_context_data(**kwargs)
@@ -159,3 +156,23 @@ class ViewBoomsdayCards(ListView):
 def deck_detail(request, pk):
     deck_data = Deck.objects.get(id=pk)
     return render(request, 'deck_detail.html', {'deck_name': deck_data.name, 'deck_description': deck_data.description, 'deck_string': deck_data.deckString})
+
+
+@login_required(login_url='/HSDT/accounts/login')
+def create_deck(request):
+    return render(request, 'create_deck.html')
+
+
+def deck_name(request, image):
+        data = {'image': image}
+        form = DeckForm(initial=data)
+        return render(request, "deck_form.html", {'form': form})
+
+
+def save_deck(request):
+    form = DeckForm(request.POST)
+    if form.is_valid():
+        model_instance = form.save(commit=False)
+        model_instance.save()
+        return redirect('HSDT:decks')
+

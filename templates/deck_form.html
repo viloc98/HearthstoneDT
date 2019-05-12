@@ -1,0 +1,8 @@
+{% extends 'blank_template.html' %}
+{% block content %}
+    <form class = "deck-form" action="{%url 'HSDT:save_deck'  %}" method="post">
+    {% csrf_token %}
+    {{ form}}
+    <input type="submit" value="Crear Deck"/>
+    </form>
+{% endblock %}
