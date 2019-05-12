@@ -133,3 +133,11 @@ class ViewBoomsdayCards(ListView):
 
     def get_queryset(self):
         return super(ViewBoomsdayCards, self).get_queryset()
+
+
+@login_required(login_url='/HSDT/accounts/login')
+def deck_detail(request):
+    deck_key = 1;
+    deck_data = Deck.objects.get(id=deck_key)
+
+    return render(request, 'deck_detail.html', {'deck_name': deck_data.name, 'deck_description': deck_data.description, 'deck_string': deck_data.deckString})
