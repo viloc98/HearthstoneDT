@@ -21,4 +21,6 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     url(r'^HSDT/', include('HSDT.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ]

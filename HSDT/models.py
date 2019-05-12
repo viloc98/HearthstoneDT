@@ -17,14 +17,13 @@ RACES = ((0, "Demon"), (1, "Dragon"), (2, "Elemental"), (3, "Mech"), (4, "Murloc
 
 class Cards(models.Model):
     cardID = models.CharField("Card ID", max_length=8, primary_key=True)
-    DeckStringID = models.CharField("Deck String ID", max_length=10)
     name = models.CharField("Name", max_length=30)
     cardSet = models.CharField("Card Set", max_length=100, choices=SETS)
     type = models.CharField("Type", max_length=30, choices=TYPES)
     rarity = models.CharField("Rarity", max_length=30, choices=QUALITIES)
     cost = models.IntegerField("Cost")
-    attack = models.IntegerField("Attack")
-    health = models.IntegerField("Health")
+    attack = models.IntegerField("Attack", null=True)
+    health = models.IntegerField("Health", null=True)
     text = models.TextField("Text", default="")
     race = models.CharField("Race", max_length=30, choices=RACES)
     playerClass = models.CharField("Player Class", max_length=30, choices=CLASSES)
