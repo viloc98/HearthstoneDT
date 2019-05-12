@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^card_detail/(?P<pk>\w+)/', views.card_detail, name='card_detail'),
 
     url(r'^deck_detail/', views.deck_detail, name='deck_detail'),
+    url(r'^deck_erase/(?P<pk>\w+)/', views.deck_erase, name='deck_erase'),
 ]

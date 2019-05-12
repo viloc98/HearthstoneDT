@@ -159,6 +159,13 @@ def deck_detail(request, pk):
 
 
 @login_required(login_url='/HSDT/accounts/login')
+def deck_erase(request, pk):
+    deck_data = Deck.objects.get(id=pk).delete()
+    return redirect('HSDT:decks')
+
+
+
+@login_required(login_url='/HSDT/accounts/login')
 def create_deck(request):
     return render(request, 'create_deck.html')
 
