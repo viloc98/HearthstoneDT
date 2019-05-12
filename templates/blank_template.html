@@ -20,8 +20,11 @@ body {font-size:16px;}
     <h3 class="w3-padding-64"><b>Hearthstone<br>Deck Builder</b></h3>
   </div>
   <div class="w3-bar-block">
-    <a href="{% url 'HSDT:cards' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Cards</a>
-    <a href="{% url 'HSDT:decks' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Decks</a>
+        <a href="{% url 'HSDT:cards' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Cards</a>
+        <a href="{% url 'HSDT:decks' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Decks</a>
+        <a href="{% url 'HSDT:create_deck' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Create new Deck</a>
+        <a href="{% url 'HSDT:signup' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Signup</a>
+        <a href="{% url 'logout' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Logout</a>
   </div>
 </nav>
 
@@ -37,7 +40,6 @@ body {font-size:16px;}
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
     {% block content %}
-
     {% endblock %}
 
 <!-- End page content -->
