@@ -155,7 +155,7 @@ class ViewBoomsdayCards(ListView):
 @login_required(login_url='/HSDT/accounts/login')
 def deck_detail(request, pk):
     deck_data = Deck.objects.get(id=pk)
-    return render(request, 'deck_detail.html', {'deck_name': deck_data.name, 'deck_description': deck_data.description, 'deck_string': deck_data.deckString})
+    return render(request, 'deck_detail.html', {'deck_name': deck_data.name, 'deck_description': deck_data.description, 'deck_string': deck_data.deckString, 'deck_image': deck_data.image})
 
 
 @login_required(login_url='/HSDT/accounts/login')
