@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^all_cards/', views.ViewCards.as_view(), name='all_cards'),
     url(r'^all_witchwood_cards/', views.ViewWitchwoodCards.as_view(), name='all_witchwood_cards'),
     url(r'^all_boomsday_cards/', views.ViewBoomsdayCards.as_view(), name='all_boomsday_cards'),
+    url(r'^card_detail/(?P<pk>\w+)/', views.card_detail, name='card_detail'),
 
     url(r'deck_detail/', views.deck_detail, name='deck_detail'),
 ]

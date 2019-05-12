@@ -1,3 +1,5 @@
+from threading import Thread
+
 import requests
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
@@ -6,7 +8,7 @@ from django.template import loader
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from HSDT.models import Cards, Deck
 
@@ -90,6 +92,16 @@ class ViewCards(ListView):
 
     def get_queryset(self):
         return super(ViewCards, self).get_queryset()
+
+
+def card_detail(request, pk):
+    card ={}
+    card['card'] = Cards.objects.filter(cardID=pk)
+    return render(request, 'card_detail.html', context=card)
+
+
+
+
 
 
 class ViewWitchwoodCards(ListView):
