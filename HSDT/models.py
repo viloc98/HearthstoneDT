@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-CLASSES = ((0, "Druid"), (1, "Hunter"), (2, "Mage"), (3, "Paladin"), (4, "Priest"), (5, "Rogue"), (6, "Shaman"), (7, "Warlock"), (8, "Warrior"), (9, "Dream"), (10, "Neutral"),)
+CLASSES = ((0, "Druid"), (1, "Hunter"), (2, "Mage"), (3, "Paladin"), (4, "Priest"), (5, "Rogue"), (6, "Shaman"), (7, "Warlock"), (8, "Warrior"), (9, "Dream"), (10, "Neutral"), (None, ''))
 
 SETS = ((0, "Basic"), (1, "Classic"), (2, "Promo"), (3, "Hall of Fame"), (4, "Naxxramas"), (5, "Goblins vs Gnomes"), (6, "Blackrock Mountain"), (7, "The Grand Tournament"),
         (8, "The League of Explorers"), (9, "Whispers of the Old Gods"), (10, "One Night in Karazhan"), (11, "Mean Streets of Gadgetzan"), (12, "Journey to Un'Goro"),
@@ -36,7 +36,8 @@ class Cards(models.Model):
 
 class Deck(models.Model):
     name = models.CharField("Name", max_length=200)
-    playerClass = models.CharField("Player Class", max_length=30, choices=CLASSES)
+    description = models.CharField("Description", max_length=2000, default="")
+    playerClass = models.IntegerField("Player Class", choices=CLASSES)
     deckString = models.CharField("Deck String", max_length=500)
 
     def __str__(self):

@@ -12,5 +12,5 @@ urlpatterns = [
     path('signup/', views.SignUp.as_view(), name='signup'),
     url(r'cards/', views.cards, name='cards'),
     url(r'decks/', views.decks, name='decks'),
-
+    url(r'deck_detail/', views.deck_detail, name='deck_detail'),
 ]
