@@ -24,11 +24,13 @@
         <tr>
             <td height="40px" width="100%" colspan="3" class="w3-red">Your decks</td>
         </tr>
-                {% for deck in decks %}
-                <tr>
-                    <td style="border-bottom-width: 0px; height: 100px;"><img align="left" src="{{deck.image}}"><h5>{{ deck.name }}</h5></td>
-                </tr>
-                {% endfor %}
+                {% if decks %}
+                    {% for deck in decks %}
+                    <tr>
+                        <td style="border-bottom-width: 0px; height: 100px;"><img align="left" src="{{deck.image}}"><h5>{{ deck.name }}</h5></td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
     </table>
     </div>
 {% endblock %}
