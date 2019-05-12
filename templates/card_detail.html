@@ -1,0 +1,12 @@
+{% extends 'blank_template.html' %}
+{% block content %}
+    <div class="w3-container" style="margin-top:80px">
+        <h1 class="w3-xxxlarge w3-text-red"><b>{{ title }}</b></h1>
+        <table>
+            {% for c in card %}
+                <h1 class="w3-jumbo"><b>{{ c.name }}</b></h1>
+                <img src="{{ c.img }}" align="centered" style="width:330px;height: auto" onerror="this.style.display='none'" alt="error">
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
