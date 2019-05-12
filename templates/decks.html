@@ -1,36 +1,35 @@
 {% extends 'blank_template.html' %}
 {% block content %}
     <div class="w3-container" style="margin-top:80px" id="expansions div">
-    <h1 class="w3-jumbo"><b>Decks</b></h1>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            text-align: center;
-        }
+        <h1 class="w3-jumbo"><b>Decks</b></h1>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                text-align: center;
+            }
 
-        table, td {
-            border: 1px solid black;
-            padding: 10px;
-            vertical-align:middle;
-        }
+            table, td {
+                border: 1px solid black;
+                padding: 10px;
+                vertical-align:middle;
+            }
 
-        img {
-            width: 100px;
-            height: 100px;
-        }
-    </style>
-    <table>
-        <tr>
-            <td height="40px" width="100%" colspan="3" class="w3-red">Your decks</td>
-        </tr>
-                {% if decks %}
-                    {% for deck in decks %}
+            img {
+                width: 100px;
+                height: 100px;
+            }
+        </style>
+        <table>
+            <tr>
+                <td height="40px" width="100%" colspan="3" class="w3-red">Your decks</td>
+            </tr>
+                {% for deck in decks %}
                     <tr>
-                        <td style="border-bottom-width: 0px; height: 100px;"><img align="left" src="{{deck.image}}"><h5>{{ deck.name }}</h5></td>
+                        <td style="border-bottom-width: 0px; height: 100px; width: 80%"><img align="left" src="{{deck.image}}"><h5>{{ deck.name }}</h5></td>
+                        <td><button><a href="{% url 'HSDT:deck_detail' pk=deck.id %} }">View Deck</a></button></td>
                     </tr>
-                    {% endfor %}
-                {% endif %}
-    </table>
+                {% endfor %}
+        </table>
     </div>
 {% endblock %}

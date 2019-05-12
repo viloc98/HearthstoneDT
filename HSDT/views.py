@@ -1,5 +1,3 @@
-from threading import Thread
-
 import requests
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
@@ -9,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
+from django.views.decorators.csrf import csrf_exempt
 
 from HSDT.models import Cards, Deck
 
@@ -157,8 +156,6 @@ class ViewBoomsdayCards(ListView):
 
 
 @login_required(login_url='/HSDT/accounts/login')
-def deck_detail(request):
-    deck_key = 1;
-    deck_data = Deck.objects.get(id=deck_key)
-
+def deck_detail(request, pk):
+    deck_data = Deck.objects.get(id=pk)
     return render(request, 'deck_detail.html', {'deck_name': deck_data.name, 'deck_description': deck_data.description, 'deck_string': deck_data.deckString})
