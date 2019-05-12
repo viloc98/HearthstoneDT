@@ -163,6 +163,22 @@ def deck_erase(request, pk):
     deck_data = Deck.objects.get(id=pk).delete()
     return redirect('HSDT:decks')
 
+@login_required(login_url='/HSDT/accounts/login')
+def deck_modify(request, pk):
+    deck_data = Deck.objects.get(id=pk)
+    data = {'name': deck_data.name, 'image': deck_data.image, 'description': deck_data.description, 'playerClass': deck_data.playerClass, 'deckString': deck_data.deckString}
+    form = DeckForm(initial=data)
+
+    return render(request, "deck_modify_form.html", {'form': form})
+
+
+def save_modifications(request, pk):
+    form = DeckForm(request.POST)
+    if form.is_valid():
+        model_instance = form.save(commit=False)
+        model_instance.save()
+        return redirect('HSDT:decks')
+
 
 
 @login_required(login_url='/HSDT/accounts/login')
