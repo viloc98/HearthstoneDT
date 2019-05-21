@@ -48,7 +48,7 @@ class Deck(models.Model):
 
 class CardInDeck(models.Model):
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
-    card = models.ForeignKey(Cards, on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
     numOfCards = models.IntegerField("Number of Cards")
 
 
