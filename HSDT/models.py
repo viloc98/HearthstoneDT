@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 CLASSES = ((0, "Druid"), (1, "Hunter"), (2, "Mage"), (3, "Paladin"), (4, "Priest"), (5, "Rogue"), (6, "Shaman"), (7, "Warlock"), (8, "Warrior"), (9, "Dream"), (10, "Neutral"), (None, ''))
@@ -49,5 +51,16 @@ class CardsInDeck(models.Model):
     card = models.ForeignKey(Cards, on_delete=models.CASCADE)
     numOfCards = models.IntegerField("Number of Cards")
 
+
+class Team(models.Model):
+    name = models.CharField("Name", max_length=200)
+    description = models.CharField("Description", max_length=2000, default="")
+    img = models.URLField("Image")
+
     def __str__(self):
         return self.name
+
+
+class PlayerInTeam(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
