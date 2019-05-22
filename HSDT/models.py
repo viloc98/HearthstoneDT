@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 CLASSES = ((0, "Druid"), (1, "Hunter"), (2, "Mage"), (3, "Paladin"), (4, "Priest"), (5, "Rogue"), (6, "Shaman"), (7, "Warlock"), (8, "Warrior"), (9, "Dream"), (10, "Neutral"), (None, ''))
@@ -15,7 +17,7 @@ QUALITIES = ((0, "Free"), (1, "Common"), (2, "Rare"), (3, "Epic"), (4, "Legendar
 RACES = ((0, "Demon"), (1, "Dragon"), (2, "Elemental"), (3, "Mech"), (4, "Murloc"), (5, "Beast"), (6, "Pirate"), (7, "Totem"),)
 
 
-class Cards(models.Model):
+class Card(models.Model):
     cardID = models.CharField("Card ID", max_length=8, primary_key=True)
     name = models.CharField("Name", max_length=30)
     cardSet = models.CharField("Card Set", max_length=100, choices=SETS)
@@ -44,10 +46,21 @@ class Deck(models.Model):
         return self.name
 
 
-class CardsInDeck(models.Model):
+class CardInDeck(models.Model):
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
-    card = models.ForeignKey(Cards, on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
     numOfCards = models.IntegerField("Number of Cards")
+
+
+class Team(models.Model):
+    name = models.CharField("Name", max_length=200)
+    description = models.CharField("Description", max_length=2000, default="")
+    img = models.URLField("Image")
 
     def __str__(self):
         return self.name
+
+
+class PlayerInTeam(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
