@@ -12,7 +12,7 @@ from django.views.generic import ListView, DetailView
 from django.views.decorators.csrf import csrf_exempt
 
 from HSDT.forms import DeckForm
-from HSDT.models import Card, Deck
+from HSDT.models import Card, Deck, Team
 
 
 def index(request):
@@ -198,4 +198,10 @@ def save_deck(request):
         model_instance = form.save(commit=False)
         model_instance.save()
         return redirect('HSDT:decks')
+
+
+def teams(request, q):
+    team = {}
+    team['card'] = Team.objects.filter(name='%' + q + '%')
+    return render(request, 'search_team.html', context=team)
 
