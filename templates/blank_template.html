@@ -23,8 +23,8 @@ body {font-size:16px;}
         <a href="{% url 'HSDT:cards' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Cards</a>
         <a href="{% url 'HSDT:decks' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Decks</a>
         <a href="{% url 'HSDT:create_deck' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Create new Deck</a>
-        <a href="{% url 'HSDT:create_deck' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Your teams</a>
-        <a href="{% url 'HSDT:search_team' q=""%}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Search teams</a>
+        <a href="{% url 'HSDT:my_team' user=user %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Your teams</a>
+        <a href="{% url 'HSDT:search_team' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Search teams</a>
         <a href="{% url 'HSDT:signup' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Signup</a>
         <a href="{% url 'logout' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Logout</a>
   </div>

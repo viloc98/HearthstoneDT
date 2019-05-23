@@ -7,12 +7,9 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
-from django.views.generic.base import View
-from django.views.generic import ListView, DetailView
-from django.views.decorators.csrf import csrf_exempt
 
 from HSDT.forms import DeckForm
-from HSDT.models import Card, Deck, Team
+from HSDT.models import Card, Deck, Team, PlayerInTeam
 
 
 def index(request):
@@ -200,8 +197,25 @@ def save_deck(request):
         return redirect('HSDT:decks')
 
 
-def teams(request, q):
+def teams(request):
     team = {}
-    team['card'] = Team.objects.filter(name='%' + q + '%')
+    search = request.GET.get('q')
+    if search:
+        query =Team.objects.filter(name__contains=search)
+    else:
+        query = Team.objects.filter(name__contains="")
+    if query:
+        team['query'] = query
     return render(request, 'search_team.html', context=team)
 
+
+def my_teams(request, user):
+    team = {}
+    search =request.GET.get('q')
+    if search:
+        query = Team.objects.filter(playerinteam__user__username__iexact=user, name__contains=search)
+    else:
+        query=Team.objects.filter(playerinteam__user__username__iexact=user, name__contains="")
+    if query:
+        team['query'] = query
+    return render(request, 'my_teams.html', context=team)

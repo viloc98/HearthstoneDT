@@ -21,7 +21,8 @@ urlpatterns = [
     url(r'^save_deck/', views.save_deck, name='save_deck'),
     url(r'^name/(?P<image>\w.+)$', views.deck_name, name='deck_name'),
     url(r'^card_detail/(?P<pk>\w+)/', views.card_detail, name='card_detail'),
-    url(r'search_teams/(?P<q>\w*)$', views.teams, name='search_team'),
+    url(r'search_teams/', views.teams, name='search_team'),
+    url(r'my_team/(?P<user>\w*)/', views.my_teams, name='my_team'),
 
     url(r'^deck_detail/', views.deck_detail, name='deck_detail'),
     url(r'^deck_erase/(?P<pk>\w+)/', views.deck_erase, name='deck_erase'),

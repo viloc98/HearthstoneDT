@@ -5,3 +5,5 @@ from HSDT.models import *
 admin.site.register(Card)
 admin.site.register(Deck)
 admin.site.register(CardInDeck)
+admin.site.register(Team)
+admin.site.register(PlayerInTeam)
