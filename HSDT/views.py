@@ -60,6 +60,7 @@ def cards(request):
 def decks(request):
     # getting our template
     template = loader.get_template('decks.html')
+    print("prova")
 
     decks = Deck.objects.filter(author=request.user)
     context = {'decks': decks}
@@ -265,10 +266,10 @@ def my_teams(request):
 
 
 @login_required(login_url='/HSDT/accounts/login')
-def team_profile(request, team, user):
+def team_profile(request, team):
     team_to_show = {}
     query = Team.objects.filter(pk=team)
-    players_query = PlayerInTeam.objects.filter(team=Team.objects.get(pk=team), user=User.objects.get(pk=user))
+    players_query = PlayerInTeam.objects.filter(team=Team.objects.get(pk=team), user=request.user)
     team_to_show['query'] = query
     if players_query:
         team_to_show['players_query'] = players_query
@@ -277,19 +278,19 @@ def team_profile(request, team, user):
 
 
 @login_required(login_url='/HSDT/accounts/login')
-def leave_team(request, user, team):
-    if PlayerInTeam.objects.filter(team__playerinteam__user_id=user, user__playerinteam__team_id=team):
+def leave_team(request, team):
+    if PlayerInTeam.objects.filter(user=request.user, user__playerinteam__team_id=team):
         PlayerInTeam.delete(
-            PlayerInTeam.objects.get(team__playerinteam__user_id=user, user__playerinteam__team_id=team))
-    return team_profile(request, user, team)
+            PlayerInTeam.objects.get(user=request.user, user__playerinteam__team_id=team))
+    return team_profile(request, team)
 
 
 @login_required(login_url='/HSDT/accounts/login')
-def join_team(request, user, team):
-    if not PlayerInTeam.objects.filter(team=Team.objects.get(id=team), user=User.objects.get(id=user)):
-        player_in_team = PlayerInTeam(team=Team.objects.get(id=team), user=User.objects.get(id=user))
+def join_team(request, team):
+    if not PlayerInTeam.objects.filter(team=Team.objects.get(id=team), user=request.user):
+        player_in_team = PlayerInTeam(team=Team.objects.get(id=team), user=request.user)
         player_in_team.save()
-    return team_profile(request, user, team)
+    return team_profile(request, team)
 
 
 def save_team(request):
@@ -303,14 +304,17 @@ def save_team(request):
 
 
 def team_decks(request, team):
-    print("hey")
+    # getting our template
+    template = loader.get_template('decks_team.html')
     users = PlayerInTeam.objects.filter(team__playerinteam__team_id=team)
     for user in users:
         print("hey")
         print(user.user)
     decks = list()
     for player in users:
-        decks.__add__(Deck.objects.filter(author=player.pk))
-    print(decks[1])
+        deckforuser =Deck.objects.filter(author=player.user)
+        for deck in deckforuser:
+            decks.append(deck)
+    print(decks)
     context = {'decks': decks}
-    return render(request, 'decks.html', context=context)
+    return HttpResponse(template.render(context))
