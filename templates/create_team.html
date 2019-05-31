@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'blank_template.html' %}
+{% block content %}
+    <div class="w3-container" style="margin-top:80px" id="expansions div">
+    <h1 class="w3-jumbo"><b>Crear Equip</b></h1>
+    <br>
+    <br>
+    <form class = "deck-form" action="{%url 'HSDT:save_team'  %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Crear Team"/>
+    </form>
+    </div>
+{% endblock %}

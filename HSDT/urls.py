@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'team_profile/(?P<user>\d*)/(?P<team>\d*)/', views.team_profile, name='team_profile'),
     url(r'join_team/(?P<user>\d*)/(?P<team>\d*)/', views.join_team, name='join_team'),
     url(r'leave_team/(?P<user>\d*)/(?P<team>\d*)', views.leave_team, name='leave_team'),
+    url(r'^create_team/', views.create_team, name='create_team'),
+    url(r'^team_create/(?P<image>\w*)/(?P<name>\w*)/(?P<description>\w*)', views.team_create, name='team_create'),
     url(r'team_decks/(?P<team>\d*)/', views.team_decks, name='team_decks'),
 
     url(r'^deck_detail/', views.deck_detail, name='deck_detail'),

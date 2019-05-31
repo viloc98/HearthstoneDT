@@ -9,9 +9,8 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 
-from HSDT import forms
-from HSDT.forms import DeckForm
-from HSDT.models import *
+from HSDT.forms import DeckForm, TeamForm
+from HSDT.models import Card, Deck, Team, PlayerInTeam
 
 
 def index(request):
@@ -205,6 +204,25 @@ def create_deck(request):
     return render(request, 'create_deck.html')
 
 
+@login_required(login_url='/HSDT/accounts/login')
+def create_team(request):
+    form = TeamForm()
+    return render(request, "create_team.html", {'form': form})
+
+
+def team_create(request, image, name, description):
+    add = Team.objects.create()
+    #add2 = PlayerInTeam.objects.create
+    print("eeeeooooooooooooooo")
+    print(name)
+    add.name = name
+    add.image = image
+    add.description = description
+    #setattr(add2, "team", add)
+    #setattr(add2, "user", request.user)
+    return redirect('HSDT:my_team', request.user)
+
+
 def deck_name(request, image, clase):
     data = {'image': image, 'playerClass': clase, 'author': request.user}
     cards = Card.objects.filter
@@ -217,9 +235,7 @@ def save_deck(request):
     if form.is_valid():
         model_instance = form.save(commit=False)
         model_instance.save()
-        deck_name = model_instance.pk
-        deck = Deck.objects.get(pk=deck_name)
-        return render(request, 'cards_in_deck.html', {'deck': deck})
+        return redirect('HSDT:decks')
 
 
 @login_required(login_url='/HSDT/accounts/login')
@@ -240,9 +256,9 @@ def my_teams(request):
     team = {}
     search = request.GET.get('q')
     if search:
-        query = Team.objects.filter(playerinteam__user=request.user, name__contains=search)
+        query = Team.objects.filter(playerinteam__user__username__iexact=request.user, name__contains=search)
     else:
-        query = Team.objects.filter(playerinteam__user=request.user, name__contains="")
+        query = Team.objects.filter(playerinteam__user__username__iexact=request.user, name__contains="")
     if query:
         team['query'] = query
     return render(request, 'my_teams.html', context=team)
@@ -262,9 +278,9 @@ def team_profile(request, team, user):
 
 @login_required(login_url='/HSDT/accounts/login')
 def leave_team(request, user, team):
-    if PlayerInTeam.objects.filter(user=User.objects.get(pk=user), team=Team.objects.get(pk=team)):
+    if PlayerInTeam.objects.filter(team__playerinteam__user_id=user, user__playerinteam__team_id=team):
         PlayerInTeam.delete(
-            PlayerInTeam.objects.get(user=User.objects.get(pk=user), team=Team.objects.get(pk=team)))
+            PlayerInTeam.objects.get(team__playerinteam__user_id=user, user__playerinteam__team_id=team))
     return team_profile(request, user, team)
 
 
@@ -274,6 +290,16 @@ def join_team(request, user, team):
         player_in_team = PlayerInTeam(team=Team.objects.get(id=team), user=User.objects.get(id=user))
         player_in_team.save()
     return team_profile(request, user, team)
+
+
+def save_team(request):
+    form = TeamForm(request.POST)
+    if form.is_valid():
+        model_instance = form.save(commit=False)
+        model_instance.save()
+        player_in_team = PlayerInTeam (user=request.user, team=model_instance)
+        player_in_team.save()
+    return my_teams(request, request.user)
 
 
 def team_decks(request, team):
