@@ -59,7 +59,7 @@ def decks(request):
     # getting our template
     template = loader.get_template('decks.html')
 
-    decks = Deck.objects.all();
+    decks = Deck.objects.filter(author=request.user)
     context = {'decks': decks}
 
     # rendering the template in HttpResponse
@@ -95,10 +95,6 @@ def card_detail(request, pk):
     card ={}
     card['card'] = Card.objects.filter(cardID=pk)
     return render(request, 'card_detail.html', context=card)
-
-
-
-
 
 
 class ViewWitchwoodCards(ListView):
@@ -183,8 +179,8 @@ def create_deck(request):
     return render(request, 'create_deck.html')
 
 
-def deck_name(request, image):
-        data = {'image': image}
+def deck_name(request, image, clase):
+        data = {'image': image, 'playerClass': clase, 'author': request.user}
         form = DeckForm(initial=data)
         return render(request, "deck_form.html", {'form': form})
 
