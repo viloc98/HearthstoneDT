@@ -216,8 +216,8 @@ def save_deck(request):
     if form.is_valid():
         model_instance = form.save(commit=False)
         model_instance.save()
-        deck_name = form.cleaned_data.get('name')
-        deck = Deck.objects.get(name=deck_name, author=request.user)
+        deck_name = model_instance.pk
+        deck = Deck.objects.get(pk=deck_name)
         return render(request, 'cards_in_deck.html', {'deck': deck})
 
 
