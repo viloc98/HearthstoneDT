@@ -1,4 +1,6 @@
 {% extends 'blank_template.html' %}
 {% block content %}
-    
+    {% for team in query %}
+    <td>{{ team.name}}</td>
+    {% endfor %}
 {% endblock %}

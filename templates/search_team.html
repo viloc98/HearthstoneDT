@@ -13,7 +13,7 @@
             <tr >
                 {% for team in query %}
                     <td>
-                        <img src="{{ team.img }}" style="width:100%; height: auto ; table-layout: fixed">
+                        <a href="{% url 'HSDT:team_profile' team=team.pk %}" ><img src="{{ team.img }}" style="width:100%; height: auto ; table-layout: fixed" ></a>
                     </td>
                 {% endfor %}
             </tr>
