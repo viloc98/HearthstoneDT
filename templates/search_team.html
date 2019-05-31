@@ -1,0 +1,32 @@
+{% extends 'blank_template.html' %}
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <form id="searchform" action="{% url 'HSDT:search_team' %}" method="get" accept-charset="utf-8">
+      <input class="searchfield" id="q" name="q" type="text" placeholder="Search">
+    <button class="searchbutton" type="submit" value="search">Search</button>
+    <br>
+    <br>
+    {% if query %}
+        <table border="1" style="width: 20%;">
+            <tr >
+                {% for team in query %}
+                    <td>
+                        <img src="{{ team.img }}" style="width:100%; height: auto ; table-layout: fixed">
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr >
+                {% for team in query %}
+                    <td align="center">
+                        <label>{{ team.name }}</label>
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+    {% endif %}
+    </form>
+
+
+{% endblock %}

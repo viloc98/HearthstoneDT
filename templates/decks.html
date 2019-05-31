@@ -27,6 +27,7 @@
                 {% for deck in decks %}
                     <tr>
                         <td style="border-bottom-width: 0px; height: 100px; width: 80%"><img align="left" src="{{deck.image}}"><h5>{{ deck.name }}</h5></td>
+                        <td><button><a href="{% url 'HSDT:deck_modify' pk=deck.id %} }">Modify</a></button></td>
                         <td><button><a href="{% url 'HSDT:deck_detail' pk=deck.id %} }">View Deck</a></button>&#160;<button><a href="{% url 'HSDT:deck_erase' pk=deck.id %} }">Delete</a></button></td>
                     </tr>
                 {% endfor %}

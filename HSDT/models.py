@@ -16,7 +16,7 @@ QUALITIES = ((0, "Free"), (1, "Common"), (2, "Rare"), (3, "Epic"), (4, "Legendar
 RACES = ((0, "Demon"), (1, "Dragon"), (2, "Elemental"), (3, "Mech"), (4, "Murloc"), (5, "Beast"), (6, "Pirate"), (7, "Totem"),)
 
 
-class Cards(models.Model):
+class Card(models.Model):
     cardID = models.CharField("Card ID", max_length=8, primary_key=True)
     name = models.CharField("Name", max_length=30)
     cardSet = models.CharField("Card Set", max_length=100, choices=SETS)
@@ -46,9 +46,9 @@ class Deck(models.Model):
         return self.name
 
 
-class CardsInDeck(models.Model):
+class CardInDeck(models.Model):
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
-    card = models.ForeignKey(Cards, on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
     numOfCards = models.IntegerField("Number of Cards")
 
 
