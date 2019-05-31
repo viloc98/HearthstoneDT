@@ -1,8 +1,18 @@
 {% extends 'blank_template.html' %}
 {% block content %}
-    <form class = "deck-form" action="{%url 'HSDT:save_deck'  %}" method="post">
-    {% csrf_token %}
-    {{ form}}
-    <input type="submit" value="Crear Deck"/>
-    </form>
+    <div class="w3-container" style="margin-top:80px" id="expansions div">
+        <h1 class="w3-jumbo"><b>Crear Deck</b></h1>
+        <form class = "deck-form" action="{%url 'HSDT:save_deck' %}" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    {{ form }}
+                </tr>
+            </table>
+            <input type="submit" value="Crear Deck"/>
+        </form>
+    </div>
+    <script language="JavaScript">
+        document.getElementById("id_image").setAttribute("readonly", "");
+    </script>
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'blank_template.html' %}
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <form id="myteamssearchform" action="{% url 'HSDT:my_team'%}" method="get" accept-charset="utf-8">
+      <input class="searchfield" id="q" name="q" type="text" placeholder="Search">
+    <button class="searchbutton" type="submit" value="search">Search</button>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+    <br>
+    <br>
+    {% if query %}
+        <table border="1" style="width: 20%;">
+            <tr >
+                {% for team in query %}
+                    <td>
+                        <a href="{% url 'HSDT:team_profile' team=team.pk %}" ><img src="{{ team.img }}" style="width:100%; height: auto ; table-layout: fixed" alt="error"></a>
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr >
+                {% for team in query %}
+                    <td align="center">
+                        <label>{{ team.name }}</label>
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+    {% endif %}
+    </form>
+    <a href="{% url 'HSDT:create_team'%}"><button>Create team</button></a>
+
+
+{% endblock %}
