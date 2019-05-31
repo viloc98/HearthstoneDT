@@ -16,7 +16,7 @@
         <h2>Neutral Cards</h2>
         <tr>
             {% for card in neutral_cards %}
-                <a><img src="{{ card.img }}" style="height:210px; width:auto" onerror="this.style.display='none'" alt="error"/></a>
+                <a href="{%url 'HSDT:card_in_deck' deck=deck.pk  card=card.cardID %}"><img src="{{ card.img }}" style="height:210px; width:auto" onerror="this.style.display='none'" alt="error"/></a>
             {% endfor %}
         </tr>
     </table>
