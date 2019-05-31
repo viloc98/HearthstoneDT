@@ -306,7 +306,7 @@ def save_team(request):
 def team_decks(request, team):
     # getting our template
     template = loader.get_template('decks_team.html')
-    users = PlayerInTeam.objects.filter(team__playerinteam__team_id=team)
+    users = PlayerInTeam.objects.filter(team_id=team)
     decks = list()
     for player in users:
         deckforuser = Deck.objects.filter(author=player.user)
