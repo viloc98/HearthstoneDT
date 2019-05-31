@@ -1,5 +1,6 @@
 import requests
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import loader
@@ -217,8 +218,25 @@ def my_teams(request, user):
     return render(request, 'my_teams.html', context=team)
 
 
-def team_profile(request, team):
+def team_profile(request, team, user):
     team_to_show = {}
     query = Team.objects.filter(pk=team)
+    players_query = PlayerInTeam.objects.filter(team=Team.objects.get(pk=team), user=User.objects.get(pk=user))
     team_to_show['query'] = query
+    if players_query:
+        team_to_show['players_query'] = players_query
+
     return render(request, 'team_profile.html', context=team_to_show)
+
+
+def leave_team(request, user, team):
+    if PlayerInTeam.objects.filter(team__playerinteam__user_id=user, user__playerinteam__team_id=team):
+        PlayerInTeam.delete(PlayerInTeam.objects.get(team__playerinteam__user_id=user, user__playerinteam__team_id=team))
+    return team_profile(request, user, team)
+
+
+def join_team(request, user, team):
+    if not PlayerInTeam.objects.filter(team=Team.objects.get(id=team), user=User.objects.get(id=user)):
+        player_in_team = PlayerInTeam(team=Team.objects.get(id=team), user=User.objects.get(id=user))
+        player_in_team.save()
+    return team_profile(request, user, team)

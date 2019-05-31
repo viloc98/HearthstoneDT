@@ -1,6 +1,14 @@
 {% extends 'blank_template.html' %}
 {% block content %}
     {% for team in query %}
-    <td>{{ team.name}}</td>
+    <h1>{{ team.name}}</h1>
+        <img src="{{ team.img }}" alt="Error">
+        {% if not players_query %}
+        <a href="{% url 'HSDT:join_team' user=user.pk  team=team.pk %}"><button style="background-color: chartreuse">Join Team</button></a>
+        {% else %}
+            <a href="{% url 'HSDT:leave_team' user=user.pk team=team.pk %}"><button style="color: brown">Leave Team</button></a>
+        {% endif %}
     {% endfor %}
+
+
 {% endblock %}
