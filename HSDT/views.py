@@ -24,6 +24,7 @@ class SignUp(generic.CreateView):
     template_name = 'registration/login.html'
 
 
+@login_required(login_url='/HSDT/accounts/login')
 def cards(request):
     cards = Card.objects.all()
     if not cards:
@@ -235,13 +236,13 @@ def teams(request):
 
 
 @login_required(login_url='/HSDT/accounts/login')
-def my_teams(request, user):
+def my_teams(request):
     team = {}
     search = request.GET.get('q')
     if search:
-        query = Team.objects.filter(playerinteam__user__username__iexact=user, name__contains=search)
+        query = Team.objects.filter(playerinteam__user=request.user, name__contains=search)
     else:
-        query = Team.objects.filter(playerinteam__user__username__iexact=user, name__contains="")
+        query = Team.objects.filter(playerinteam__user=request.user, name__contains="")
     if query:
         team['query'] = query
     return render(request, 'my_teams.html', context=team)
@@ -261,9 +262,9 @@ def team_profile(request, team, user):
 
 @login_required(login_url='/HSDT/accounts/login')
 def leave_team(request, user, team):
-    if PlayerInTeam.objects.filter(team__playerinteam__user_id=user, user__playerinteam__team_id=team):
+    if PlayerInTeam.objects.filter(user=User.objects.get(pk=user), team=Team.objects.get(pk=team)):
         PlayerInTeam.delete(
-            PlayerInTeam.objects.get(team__playerinteam__user_id=user, user__playerinteam__team_id=team))
+            PlayerInTeam.objects.get(user=User.objects.get(pk=user), team=Team.objects.get(pk=team)))
     return team_profile(request, user, team)
 
 
@@ -273,3 +274,17 @@ def join_team(request, user, team):
         player_in_team = PlayerInTeam(team=Team.objects.get(id=team), user=User.objects.get(id=user))
         player_in_team.save()
     return team_profile(request, user, team)
+
+
+def team_decks(request, team):
+    print("hey")
+    users = PlayerInTeam.objects.filter(team__playerinteam__team_id=team)
+    for user in users:
+        print("hey")
+        print(user.user)
+    decks = list()
+    for player in users:
+        decks.__add__(Deck.objects.filter(author=player.pk))
+    print(decks[1])
+    context = {'decks': decks}
+    return render(request, 'decks.html', context=context)
