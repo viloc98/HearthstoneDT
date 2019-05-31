@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 CLASSES = ((0, "Druid"), (1, "Hunter"), (2, "Mage"), (3, "Paladin"), (4, "Priest"), (5, "Rogue"), (6, "Shaman"), (7, "Warlock"), (8, "Warrior"), (9, "Dream"), (10, "Neutral"), (None, ''))
 
@@ -37,6 +36,7 @@ class Cards(models.Model):
 
 class Deck(models.Model):
     name = models.CharField("Name", max_length=200)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default="")
     description = models.CharField("Description", max_length=2000, default="")
     playerClass = models.IntegerField("Player Class", choices=CLASSES)
     deckString = models.CharField("Deck String", max_length=500)
