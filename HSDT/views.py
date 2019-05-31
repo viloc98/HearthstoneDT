@@ -194,6 +194,7 @@ def save_deck(request):
         return redirect('HSDT:decks')
 
 
+@login_required(login_url='/HSDT/accounts/login')
 def teams(request):
     team = {}
     search = request.GET.get('q')
@@ -206,6 +207,7 @@ def teams(request):
     return render(request, 'search_team.html', context=team)
 
 
+@login_required(login_url='/HSDT/accounts/login')
 def my_teams(request, user):
     team = {}
     search =request.GET.get('q')
@@ -218,6 +220,7 @@ def my_teams(request, user):
     return render(request, 'my_teams.html', context=team)
 
 
+@login_required(login_url='/HSDT/accounts/login')
 def team_profile(request, team, user):
     team_to_show = {}
     query = Team.objects.filter(pk=team)
@@ -229,12 +232,14 @@ def team_profile(request, team, user):
     return render(request, 'team_profile.html', context=team_to_show)
 
 
+@login_required(login_url='/HSDT/accounts/login')
 def leave_team(request, user, team):
     if PlayerInTeam.objects.filter(team__playerinteam__user_id=user, user__playerinteam__team_id=team):
         PlayerInTeam.delete(PlayerInTeam.objects.get(team__playerinteam__user_id=user, user__playerinteam__team_id=team))
     return team_profile(request, user, team)
 
 
+@login_required(login_url='/HSDT/accounts/login')
 def join_team(request, user, team):
     if not PlayerInTeam.objects.filter(team=Team.objects.get(id=team), user=User.objects.get(id=user)):
         player_in_team = PlayerInTeam(team=Team.objects.get(id=team), user=User.objects.get(id=user))
