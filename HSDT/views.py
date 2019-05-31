@@ -148,7 +148,7 @@ class ViewBoomsdayCards(ListView):
 @login_required(login_url='/HSDT/accounts/login')
 def deck_detail(request, pk):
     deck_data = Deck.objects.get(id=pk)
-    return render(request, 'deck_detail.html', {'deck_name': deck_data.name, 'deck_description': deck_data.description, 'deck_string': deck_data.deckString, 'deck_image': deck_data.image})
+    return render(request, 'deck_detail.html', {'deck_name': deck_data.name, 'deck_description': deck_data.description, 'deck_image': deck_data.image})
 
 
 @login_required(login_url='/HSDT/accounts/login')
@@ -159,7 +159,7 @@ def deck_erase(request, pk):
 @login_required(login_url='/HSDT/accounts/login')
 def deck_modify(request, pk):
     deck_data = Deck.objects.get(id=pk)
-    data = {'name': deck_data.name, 'image': deck_data.image, 'description': deck_data.description, 'playerClass': deck_data.playerClass, 'deckString': deck_data.deckString}
+    data = {'name': deck_data.name, 'image': deck_data.image, 'description': deck_data.description, 'playerClass': deck_data.playerClass}
     form = DeckForm(initial=data)
 
     return render(request, "deck_modify_form.html", {'form': form})
