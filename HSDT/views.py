@@ -303,21 +303,17 @@ def save_team(request):
         model_instance.save()
         player_in_team = PlayerInTeam(user=request.user, team=model_instance)
         player_in_team.save()
-    return my_teams(request, request.user)
+    return my_teams(request)
 
 
 def team_decks(request, team):
     # getting our template
     template = loader.get_template('decks_team.html')
     users = PlayerInTeam.objects.filter(team__playerinteam__team_id=team)
-    for user in users:
-        print("hey")
-        print(user.user)
     decks = list()
     for player in users:
         deckforuser = Deck.objects.filter(author=player.user)
         for deck in deckforuser:
             decks.append(deck)
-    print(decks)
     context = {'decks': decks}
     return HttpResponse(template.render(context))

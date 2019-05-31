@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^all_boomsday_cards/', views.ViewBoomsdayCards.as_view(), name='all_boomsday_cards'),
     url(r'^create_deck/', views.create_deck, name='create_deck'),
     url(r'^save_deck/', views.save_deck, name='save_deck'),
+    url(r'^save_team/', views.save_team, name='save_team'),
     url(r'^name/(?P<image>\w.+)(?P<clase>\d+)$', views.deck_name, name='deck_name'),
     url(r'^card_detail/(?P<pk>\w+)/', views.card_detail, name='card_detail'),
     url(r'search_teams/', views.teams, name='search_team'),
