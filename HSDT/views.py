@@ -183,24 +183,6 @@ def deck_erase(request, pk):
 
 
 @login_required(login_url='/HSDT/accounts/login')
-def deck_modify(request, pk):
-    deck_data = Deck.objects.get(id=pk)
-    data = {'name': deck_data.name, 'image': deck_data.image, 'description': deck_data.description,
-            'playerClass': deck_data.playerClass}
-    form = DeckForm(initial=data)
-
-    return render(request, "deck_modify_form.html", {'form': form})
-
-
-def save_modifications(request, pk):
-    form = DeckForm(request.POST)
-    if form.is_valid():
-        model_instance = form.save(commit=False)
-        model_instance.save()
-        return redirect('HSDT:decks')
-
-
-@login_required(login_url='/HSDT/accounts/login')
 def create_deck(request):
     return render(request, 'create_deck.html')
 
@@ -213,14 +195,14 @@ def create_team(request):
 
 def team_create(request, image, name, description):
     add = Team.objects.create()
-    #add2 = PlayerInTeam.objects.create
+    # add2 = PlayerInTeam.objects.create
     print("eeeeooooooooooooooo")
     print(name)
     add.name = name
     add.image = image
     add.description = description
-    #setattr(add2, "team", add)
-    #setattr(add2, "user", request.user)
+    # setattr(add2, "team", add)
+    # setattr(add2, "user", request.user)
     return redirect('HSDT:my_team', request.user)
 
 
@@ -241,7 +223,8 @@ def save_deck(request):
 
 
 def card_in_deck(request, deck, card):
-    if Card.objects.filter(cardindeck__deck=deck).count() < 30 and CardInDeck.objects.filter(deck=deck, card=card).count() < 2:
+    if Card.objects.filter(cardindeck__deck=deck).count() < 30 and CardInDeck.objects.filter(deck=deck,
+                                                                                             card=card).count() < 2:
         cardInDeck = CardInDeck(deck=Deck.objects.get(pk=deck), card=Card.objects.get(pk=card))
         cardInDeck.save()
 
@@ -257,7 +240,6 @@ def all_valid_cards(deck, player_class):
     neutral_cards = Card.objects.filter(playerClass='Neutral').order_by('cost', 'name')
     actual_cards = Card.objects.filter(cardindeck__deck=deck).order_by('cost', 'name')
     return {'deck': deck, 'class_cards': class_cards, 'neutral_cards': neutral_cards, 'actual_cards': actual_cards}
-
 
 
 @login_required(login_url='/HSDT/accounts/login')
@@ -319,7 +301,7 @@ def save_team(request):
     if form.is_valid():
         model_instance = form.save(commit=False)
         model_instance.save()
-        player_in_team = PlayerInTeam (user=request.user, team=model_instance)
+        player_in_team = PlayerInTeam(user=request.user, team=model_instance)
         player_in_team.save()
     return my_teams(request, request.user)
 
@@ -333,7 +315,7 @@ def team_decks(request, team):
         print(user.user)
     decks = list()
     for player in users:
-        deckforuser =Deck.objects.filter(author=player.user)
+        deckforuser = Deck.objects.filter(author=player.user)
         for deck in deckforuser:
             decks.append(deck)
     print(decks)
