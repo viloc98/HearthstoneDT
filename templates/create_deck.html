@@ -1,5 +1,10 @@
 {% extends 'blank_template.html' %}
+{% block title %}HearthstoneDB Deck Builder{% endblock %}
 {% block content %}
+    <div style="display:none" itemscope itemtype ="http://schema.org/WebPage">
+        <h1 itemprop="name">Create deck</h1>
+        <span itemprop="description">Create your deck and customize</span>
+    </div>
   <div class="w3-container" style="margin-top:80px" id="expansions div">
     <h1 class="w3-xxxlarge w3-text-red"><b>Choose class</b></h1>
       <table>

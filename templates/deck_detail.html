@@ -1,5 +1,9 @@
 {% extends 'blank_template.html' %}
 {% block content %}
+    <div style="display:none" itemscope itemtype ="http://schema.org/WebPage">
+        <h1 itemprop="name">{{ deck_name }}</h1>
+        <span itemprop="description">{{ deck_description }}</span>
+    </div>
     <h1 class="w3-jumbo"><b>{{ deck_name }}</b></h1>
     <table>
         <tr>

@@ -1,9 +1,18 @@
 {% extends 'blank_template.html' %}
+{% block title %}HearthstoneDB Deck Builder{% endblock %}
 {% block content %}
+    <div style="display:none" itemscope itemtype ="http://schema.org/WebPage">
+        <h1 itemprop="name">{{ card.name }}</h1>
+        <span itemprop="description">{{ card.description }}</span>
+    </div>
     <div class="w3-container" style="margin-top:80px">
         <h1 class="w3-xxxlarge w3-text-red"><b>{{ title }}</b></h1>
         <table>
             {% for c in card %}
+                <div style="display:none" itemscope itemtype ="http://schema.org/WebPage">
+                    <span itemprop="name">{{ card.name }}</span>
+                    <span itemprop="description">{{ card.description}}</span>
+                </div>
                 <h1 class="w3-jumbo"><b>{{ c.name }}</b></h1>
                 <img src="{{ c.img }}" align="centered" style="width:330px;height: auto" onerror="this.style.display='none'" alt="error">
             {% endfor %}

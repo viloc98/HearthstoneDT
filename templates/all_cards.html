@@ -1,11 +1,17 @@
 {% extends 'blank_template.html' %}
+{% block title %}HearthstoneDB Deck Builder{% endblock %}
 {% block content %}
+    <div style="display:none" itemscope itemtype ="http://schema.org/WebPage">
+        <h1 itemprop="name">Card collection Hearthstone</h1>
+        <span itemprop="description">See all the cards in Hearthstone</span>
+    </div>
     <div class="w3-container" style="margin-top:80px" id="expansions div">
         <h1 class="w3-jumbo"><b>Cards</b></h1>
         <h1 class="w3-xxxlarge w3-text-red"><b>{{ title }}</b></h1>
         <table>
             <tr>
                 {% if druid %}
+                    <span style="display:none" property="class">druid</span>
                     <h1 class="w3-xxxlarge w3-text-red"><b>Druid</b></h1>
                     {% for card in druid %}
                        <a href="{% url 'HSDT:card_detail' pk=card.cardID %}"><img src="{{ card.img }}" style="width:220px;height: auto" onerror="this.style.display='none'" alt="error"></a>
@@ -14,6 +20,7 @@
             </tr>
             <tr>
                 {% if hunter %}
+                    <span style="display:none" property="class">hunter</span>
                     <h1 class="w3-xxxlarge w3-text-red"><b>Hunter</b></h1>
                     {% for card in hunter %}
                         <a href="{% url 'HSDT:card_detail' pk=card.cardID %}"><img src="{{ card.img }}" style="width:220px;height: auto" onerror="this.style.display='none'" alt="error"></a>
@@ -22,6 +29,7 @@
             </tr>
             <tr>
                 {% if mage %}
+                    <span style="display:none" property="class">mage</span>
                     <h1 class="w3-xxxlarge w3-text-red"><b>Mage</b></h1>
                     {% for card in mage %}
                         <a href="{% url 'HSDT:card_detail' pk=card.cardID %}"><img src="{{ card.img }}" style="width:220px;height: auto" onerror="this.style.display='none'" alt="error"></a>
@@ -30,6 +38,7 @@
             </tr>
             <tr>
                 {% if paladin %}
+                    <span style="display:none" property="class">paladin</span>
                     <h1 class="w3-xxxlarge w3-text-red"><b>Paladin</b></h1>
                     {% for card in paladin %}
                         <a href="{% url 'HSDT:card_detail' pk=card.cardID %}"><img src="{{ card.img }}" style="width:220px;height: auto" onerror="this.style.display='none'" alt="error"></a>
@@ -38,6 +47,7 @@
             </tr>
             <tr>
                 {% if priest %}
+                    <span style="display:none" property="class">priest</span>
                     <h1 class="w3-xxxlarge w3-text-red"><b>Priest</b></h1>
                     {% for card in priest %}
                         <a href="{% url 'HSDT:card_detail' pk=card.cardID %}"><img src="{{ card.img }}" style="width:220px;height: auto" onerror="this.style.display='none'" alt="error"></a>
@@ -46,6 +56,7 @@
             </tr>
             <tr>
                 {% if rogue %}
+                    <span style="display:none" property="class">rogue</span>
                     <h1 class="w3-xxxlarge w3-text-red"><b>Rogue</b></h1>
                     {% for card in rogue %}
                         <a href="{% url 'HSDT:card_detail' pk=card.cardID %}"><img src="{{ card.img }}" style="width:220px;height: auto" onerror="this.style.display='none'" alt="error"></a>
@@ -54,6 +65,7 @@
             </tr>
             <tr>
                 {% if shaman %}
+                    <span style="display:none" property="class">shaman</span>
                     <h1 class="w3-xxxlarge w3-text-red"><b>Shaman</b></h1>
                     {% for card in shaman %}
                         <a href="{% url 'HSDT:card_detail' pk=card.cardID %}"><img src="{{ card.img }}" style="width:220px;height: auto" onerror="this.style.display='none'" alt="error"></a>
@@ -62,6 +74,7 @@
             </tr>
             <tr>
                 {% if warlock %}
+                    <span style="display:none" property="class">warlock</span>
                     <h1 class="w3-xxxlarge w3-text-red"><b>Warlock</b></h1>
                     {% for card in warlock %}
                         <a href="{% url 'HSDT:card_detail' pk=card.cardID %}"><img src="{{ card.img }}" style="width:220px;height: auto" onerror="this.style.display='none'" alt="error"></a>
@@ -70,6 +83,7 @@
             </tr>
             <tr>
                 {% if warrior %}
+                    <span style="display:none" property="class">warrior</span>
                     <h1 class="w3-xxxlarge w3-text-red"><b>Warrior</b></h1>
                     {% for card in warrior %}
                         <a href="{% url 'HSDT:card_detail' pk=card.cardID %}"><img src="{{ card.img }}" style="width:220px;height: auto" onerror="this.style.display='none'" alt="error"></a>
