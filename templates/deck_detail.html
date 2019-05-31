@@ -7,17 +7,16 @@
             <td style="width: 100px">&#160;</td>
             <td><img src="{{ deck_image }}" alt="Deck Image"/></td>
         </tr>
-        {% for card in cards %}
-            <tr>
-                <td>&#160;</td>
-                <td>&#160;</td>
-                <td><img src="{{ card.img }}" alt="{{ card.name }}" style="height:210px; width:auto"/></td>
-            </tr>
-        {% endfor %}
+
         <tr></tr>
         <tr>
             <td>&#160;</td>
             <td style="width: 100px">&#160;</td>
         </tr>
+    </table>
+    <table>
+    {% for card in cards %}
+                <img src="{{ card.img }}" alt="{{ card.name }}" style="height:210px; width:auto"/>
+        {% endfor %}
     </table>
 {% endblock %}
