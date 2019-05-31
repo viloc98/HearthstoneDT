@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 
 from HSDT.forms import DeckForm, TeamForm
-from HSDT.models import Card, Deck, Team, PlayerInTeam
+from HSDT.models import Card, Deck, Team, PlayerInTeam, CardInDeck
 
 
 def index(request):
@@ -236,7 +236,28 @@ def save_deck(request):
     if form.is_valid():
         model_instance = form.save(commit=False)
         model_instance.save()
-        return redirect('HSDT:decks')
+        data = all_valid_cards(model_instance.pk, model_instance.playerClass)
+        return render(request, 'cards_in_deck.html', data)
+
+
+def card_in_deck(request, deck, card):
+    if Card.objects.filter(cardindeck__deck=deck).count() < 30 and CardInDeck.objects.filter(deck=deck, card=card).count() < 2:
+        cardInDeck = CardInDeck(deck=Deck.objects.get(pk=deck), card=Card.objects.get(pk=card))
+        cardInDeck.save()
+
+    data = all_valid_cards(deck, Deck.objects.get(pk=deck).playerClass)
+    return render(request, 'cards_in_deck.html', data)
+
+
+def all_valid_cards(deck, player_class):
+    CLASSES = {0: "Druid", 1: "Hunter", 2: "Mage", 3: "Paladin", 4: "Priest", 5: "Rogue", 6: "Shaman",
+               7: "Warlock", 8: "Warrior"}
+    deck = Deck.objects.get(pk=deck)
+    class_cards = Card.objects.filter(playerClass=CLASSES[player_class]).order_by('cost', 'name')
+    neutral_cards = Card.objects.filter(playerClass='Neutral').order_by('cost', 'name')
+    actual_cards = Card.objects.filter(cardindeck__deck=deck).order_by('cost', 'name')
+    return {'deck': deck, 'class_cards': class_cards, 'neutral_cards': neutral_cards, 'actual_cards': actual_cards}
+
 
 
 @login_required(login_url='/HSDT/accounts/login')

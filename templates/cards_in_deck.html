@@ -1,4 +1,23 @@
 {% extends 'blank_template.html' %}
 {% block content %}
-
+    <h1 class="w3-jumbo"><b>Add cards to {{ deck.name }}</b></h1>
+    <h2 style="color: darkred">Each deck can have a maximum of 30 cards and only 2 copies of each <card></card></h2>
+    <table>
+    <h2>Actual cards in the deck</h2>
+        {% for card in actual_cards %}
+            <tr><img src="{{ card.img }}" style="height:210px; width:auto" onerror="this.style.display='none'" alt="error"/></tr>
+        {% endfor %}
+        <h2>Class Cards</h2>
+        <tr>
+            {% for card in class_cards %}
+                <a href="{%url 'HSDT:card_in_deck' deck=deck.pk  card=card.cardID %}"><img src="{{ card.img }}" style="height:210px; width:auto" onerror="this.style.display='none'" alt="error"/></a>
+            {% endfor %}
+        </tr>
+        <h2>Neutral Cards</h2>
+        <tr>
+            {% for card in neutral_cards %}
+                <a><img src="{{ card.img }}" style="height:210px; width:auto" onerror="this.style.display='none'" alt="error"/></a>
+            {% endfor %}
+        </tr>
+    </table>
 {% endblock %}
