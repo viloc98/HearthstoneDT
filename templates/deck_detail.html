@@ -1,29 +1,23 @@
 {% extends 'blank_template.html' %}
 {% block content %}
-    <script language="JavaScript">
-        function copy_text()
-        {
-            var tempInput = document.createElement("input");
-            tempInput.style = "position: absolute; left: -1000px; top: -1000px";
-            tempInput.value = document.getElementById("deck_string").value;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-        }
-    </script>
     <h1 class="w3-jumbo"><b>{{ deck_name }}</b></h1>
     <table>
         <tr>
             <td style="width: 70%">{{ deck_description }}</td>
             <td style="width: 100px">&#160;</td>
-            <td><img src="{{ deck_image }}" alt="Error"/></td>
+            <td><img src="{{ deck_image }}" alt="Deck Image"/></td>
         </tr>
+        {% for card in cards %}
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td><img src="{{ card.image }}" alt="{{ card.name }}"/></td>
+            </tr>
+        {% endfor %}
         <tr></tr>
         <tr>
             <td>&#160;</td>
             <td style="width: 100px">&#160;</td>
-            <td><button onclick="copy_text()">Copy Deck</button></td>
         </tr>
     </table>
 {% endblock %}

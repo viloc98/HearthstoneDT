@@ -9,8 +9,9 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 
+from HSDT import forms
 from HSDT.forms import DeckForm
-from HSDT.models import Card, Deck, Team, PlayerInTeam
+from HSDT.models import *
 
 
 def index(request):
@@ -93,7 +94,7 @@ class ViewCards(ListView):
 
 
 def card_detail(request, pk):
-    card ={}
+    card = {}
     card['card'] = Card.objects.filter(cardID=pk)
     return render(request, 'card_detail.html', context=card)
 
@@ -106,16 +107,26 @@ class ViewWitchwoodCards(ListView):
     def get_context_data(self, **kwargs):
         context = super(ViewWitchwoodCards, self).get_context_data(**kwargs)
         context['title'] = 'The Witchwood'
-        context['druid'] = Card.objects.all().filter(playerClass__exact="Druid", cardSet__exact="The Witchwood").order_by('cost')
-        context['hunter'] = Card.objects.all().filter(playerClass__exact="Hunter", cardSet__exact="The Witchwood").order_by('cost')
-        context['mage'] = Card.objects.all().filter(playerClass__exact="Mage", cardSet__exact="The Witchwood").order_by('cost')
-        context['priest'] = Card.objects.all().filter(playerClass__exact="Priest", cardSet__exact="The Witchwood").order_by('cost')
-        context['paladin'] = Card.objects.all().filter(playerClass__exact="Paladin", cardSet__exact="The Witchwood").order_by('cost')
-        context['rogue'] = Card.objects.all().filter(playerClass__exact="Rogue", cardSet__exact="The Witchwood").order_by('cost')
-        context['shaman'] = Card.objects.all().filter(playerClass__exact="Shaman", cardSet__exact="The Witchwood").order_by('cost')
-        context['warlock'] = Card.objects.all().filter(playerClass__exact="Warlock", cardSet__exact="The Witchwood").order_by('cost')
-        context['warrior'] = Card.objects.all().filter(playerClass__exact="Warrior", cardSet__exact="The Witchwood").order_by('cost')
-        context['neutral'] = Card.objects.all().filter(playerClass__exact="Neutral", cardSet__exact="The Witchwood").order_by('cost')
+        context['druid'] = Card.objects.all().filter(playerClass__exact="Druid",
+                                                     cardSet__exact="The Witchwood").order_by('cost')
+        context['hunter'] = Card.objects.all().filter(playerClass__exact="Hunter",
+                                                      cardSet__exact="The Witchwood").order_by('cost')
+        context['mage'] = Card.objects.all().filter(playerClass__exact="Mage", cardSet__exact="The Witchwood").order_by(
+            'cost')
+        context['priest'] = Card.objects.all().filter(playerClass__exact="Priest",
+                                                      cardSet__exact="The Witchwood").order_by('cost')
+        context['paladin'] = Card.objects.all().filter(playerClass__exact="Paladin",
+                                                       cardSet__exact="The Witchwood").order_by('cost')
+        context['rogue'] = Card.objects.all().filter(playerClass__exact="Rogue",
+                                                     cardSet__exact="The Witchwood").order_by('cost')
+        context['shaman'] = Card.objects.all().filter(playerClass__exact="Shaman",
+                                                      cardSet__exact="The Witchwood").order_by('cost')
+        context['warlock'] = Card.objects.all().filter(playerClass__exact="Warlock",
+                                                       cardSet__exact="The Witchwood").order_by('cost')
+        context['warrior'] = Card.objects.all().filter(playerClass__exact="Warrior",
+                                                       cardSet__exact="The Witchwood").order_by('cost')
+        context['neutral'] = Card.objects.all().filter(playerClass__exact="Neutral",
+                                                       cardSet__exact="The Witchwood").order_by('cost')
         return context
 
     def get_queryset(self):
@@ -130,16 +141,26 @@ class ViewBoomsdayCards(ListView):
     def get_context_data(self, **kwargs):
         context = super(ViewBoomsdayCards, self).get_context_data(**kwargs)
         context['title'] = 'The Boomsday Project'
-        context['druid'] = Card.objects.all().filter(playerClass__exact="Druid", cardSet__exact="The Boomsday Project").order_by('cost')
-        context['hunter'] = Card.objects.all().filter(playerClass__exact="Hunter", cardSet__exact="The Boomsday Project").order_by('cost')
-        context['mage'] = Card.objects.all().filter(playerClass__exact="Mage", cardSet__exact="The Boomsday Project").order_by('cost')
-        context['priest'] = Card.objects.all().filter(playerClass__exact="Priest", cardSet__exact="The Boomsday Project").order_by('cost')
-        context['paladin'] = Card.objects.all().filter(playerClass__exact="Paladin", cardSet__exact="The Boomsday Project").order_by('cost')
-        context['rogue'] = Card.objects.all().filter(playerClass__exact="Rogue", cardSet__exact="The Boomsday Project").order_by('cost')
-        context['shaman'] = Card.objects.all().filter(playerClass__exact="Shaman", cardSet__exact="The Boomsday Project").order_by('cost')
-        context['warlock'] = Card.objects.all().filter(playerClass__exact="Warlock", cardSet__exact="The Boomsday Project").order_by('cost')
-        context['warrior'] = Card.objects.all().filter(playerClass__exact="Warrior", cardSet__exact="The Boomsday Project").order_by('cost')
-        context['neutral'] = Card.objects.all().filter(playerClass__exact="Neutral", cardSet__exact="The Boomsday Project").order_by('cost')
+        context['druid'] = Card.objects.all().filter(playerClass__exact="Druid",
+                                                     cardSet__exact="The Boomsday Project").order_by('cost')
+        context['hunter'] = Card.objects.all().filter(playerClass__exact="Hunter",
+                                                      cardSet__exact="The Boomsday Project").order_by('cost')
+        context['mage'] = Card.objects.all().filter(playerClass__exact="Mage",
+                                                    cardSet__exact="The Boomsday Project").order_by('cost')
+        context['priest'] = Card.objects.all().filter(playerClass__exact="Priest",
+                                                      cardSet__exact="The Boomsday Project").order_by('cost')
+        context['paladin'] = Card.objects.all().filter(playerClass__exact="Paladin",
+                                                       cardSet__exact="The Boomsday Project").order_by('cost')
+        context['rogue'] = Card.objects.all().filter(playerClass__exact="Rogue",
+                                                     cardSet__exact="The Boomsday Project").order_by('cost')
+        context['shaman'] = Card.objects.all().filter(playerClass__exact="Shaman",
+                                                      cardSet__exact="The Boomsday Project").order_by('cost')
+        context['warlock'] = Card.objects.all().filter(playerClass__exact="Warlock",
+                                                       cardSet__exact="The Boomsday Project").order_by('cost')
+        context['warrior'] = Card.objects.all().filter(playerClass__exact="Warrior",
+                                                       cardSet__exact="The Boomsday Project").order_by('cost')
+        context['neutral'] = Card.objects.all().filter(playerClass__exact="Neutral",
+                                                       cardSet__exact="The Boomsday Project").order_by('cost')
         return context
 
     def get_queryset(self):
@@ -149,7 +170,9 @@ class ViewBoomsdayCards(ListView):
 @login_required(login_url='/HSDT/accounts/login')
 def deck_detail(request, pk):
     deck_data = Deck.objects.get(id=pk)
-    return render(request, 'deck_detail.html', {'deck_name': deck_data.name, 'deck_description': deck_data.description, 'deck_image': deck_data.image})
+    crds = Card.objects.filter(cardindeck__deck=pk).order_by('cost', 'name')
+    return render(request, 'deck_detail.html', {'deck_name': deck_data.name, 'deck_description': deck_data.description,
+                                                'deck_image': deck_data.image, 'cards': crds})
 
 
 @login_required(login_url='/HSDT/accounts/login')
@@ -157,10 +180,12 @@ def deck_erase(request, pk):
     deck_data = Deck.objects.get(id=pk).delete()
     return redirect('HSDT:decks')
 
+
 @login_required(login_url='/HSDT/accounts/login')
 def deck_modify(request, pk):
     deck_data = Deck.objects.get(id=pk)
-    data = {'name': deck_data.name, 'image': deck_data.image, 'description': deck_data.description, 'playerClass': deck_data.playerClass}
+    data = {'name': deck_data.name, 'image': deck_data.image, 'description': deck_data.description,
+            'playerClass': deck_data.playerClass}
     form = DeckForm(initial=data)
 
     return render(request, "deck_modify_form.html", {'form': form})
@@ -174,16 +199,16 @@ def save_modifications(request, pk):
         return redirect('HSDT:decks')
 
 
-
 @login_required(login_url='/HSDT/accounts/login')
 def create_deck(request):
     return render(request, 'create_deck.html')
 
 
 def deck_name(request, image, clase):
-        data = {'image': image, 'playerClass': clase, 'author': request.user}
-        form = DeckForm(initial=data)
-        return render(request, "deck_form.html", {'form': form})
+    data = {'image': image, 'playerClass': clase, 'author': request.user}
+    cards = Card.objects.filter
+    form = DeckForm(initial=data)
+    return render(request, "deck_form.html", {'form': form})
 
 
 def save_deck(request):
@@ -191,7 +216,9 @@ def save_deck(request):
     if form.is_valid():
         model_instance = form.save(commit=False)
         model_instance.save()
-        return redirect('HSDT:decks')
+        deck_name = form.cleaned_data.get('name')
+        deck = Deck.objects.get(name=deck_name, author=request.user)
+        return render(request, 'cards_in_deck.html', {'deck': deck})
 
 
 @login_required(login_url='/HSDT/accounts/login')
@@ -199,7 +226,7 @@ def teams(request):
     team = {}
     search = request.GET.get('q')
     if search:
-        query =Team.objects.filter(name__contains=search)
+        query = Team.objects.filter(name__contains=search)
     else:
         query = Team.objects.filter(name__contains="")
     if query:
@@ -210,11 +237,11 @@ def teams(request):
 @login_required(login_url='/HSDT/accounts/login')
 def my_teams(request, user):
     team = {}
-    search =request.GET.get('q')
+    search = request.GET.get('q')
     if search:
         query = Team.objects.filter(playerinteam__user__username__iexact=user, name__contains=search)
     else:
-        query=Team.objects.filter(playerinteam__user__username__iexact=user, name__contains="")
+        query = Team.objects.filter(playerinteam__user__username__iexact=user, name__contains="")
     if query:
         team['query'] = query
     return render(request, 'my_teams.html', context=team)
@@ -235,7 +262,8 @@ def team_profile(request, team, user):
 @login_required(login_url='/HSDT/accounts/login')
 def leave_team(request, user, team):
     if PlayerInTeam.objects.filter(team__playerinteam__user_id=user, user__playerinteam__team_id=team):
-        PlayerInTeam.delete(PlayerInTeam.objects.get(team__playerinteam__user_id=user, user__playerinteam__team_id=team))
+        PlayerInTeam.delete(
+            PlayerInTeam.objects.get(team__playerinteam__user_id=user, user__playerinteam__team_id=team))
     return team_profile(request, user, team)
 
 

@@ -27,9 +27,11 @@ urlpatterns = [
     url(r'join_team/(?P<user>\d*)/(?P<team>\d*)/', views.join_team, name='join_team'),
     url(r'leave_team/(?P<user>\d*)/(?P<team>\d*)', views.leave_team, name='leave_team'),
 
+    url(r'team_profile/(?P<team>\d*)/', views.team_profile, name='team_profile'),
     url(r'^deck_detail/', views.deck_detail, name='deck_detail'),
     url(r'^deck_erase/(?P<pk>\w+)/', views.deck_erase, name='deck_erase'),
     url(r'^save_modifications/', views.save_modifications, name='save_modifications'),
     url(r'^deck_modify/(?P<pk>\w+)/', views.deck_modify, name='deck_modify'),
+    #url(r'^cards_in_deck(?P<deck>\w+)/', views.card_in_deck, name='card_in_deck'),
 
 ]
