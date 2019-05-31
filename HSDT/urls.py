@@ -34,6 +34,6 @@ urlpatterns = [
     url(r'^deck_erase/(?P<pk>\w+)/', views.deck_erase, name='deck_erase'),
     url(r'^save_modifications/', views.save_modifications, name='save_modifications'),
     url(r'^deck_modify/(?P<pk>\w+)/', views.deck_modify, name='deck_modify'),
-    #url(r'^cards_in_deck(?P<deck>\w+)/', views.card_in_deck, name='card_in_deck'),
+    url(r'^cards_in_deck(?P<deck>\w+)/(?P<card>\w+)/', views.card_in_deck, name='card_in_deck'),
 
 ]
