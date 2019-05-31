@@ -215,3 +215,10 @@ def my_teams(request, user):
     if query:
         team['query'] = query
     return render(request, 'my_teams.html', context=team)
+
+
+def team_profile(request, team):
+    team_to_show = {}
+    query = Team.objects.filter(pk=team)
+    team_to_show['query'] = query
+    return render(request, 'team_profile.html', context=team_to_show)
