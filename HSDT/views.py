@@ -60,7 +60,6 @@ def cards(request):
 def decks(request):
     # getting our template
     template = loader.get_template('decks.html')
-    print("prova")
 
     decks = Deck.objects.filter(author=request.user)
     context = {'decks': decks}
@@ -196,8 +195,6 @@ def create_team(request):
 def team_create(request, image, name, description):
     add = Team.objects.create()
     # add2 = PlayerInTeam.objects.create
-    print("eeeeooooooooooooooo")
-    print(name)
     add.name = name
     add.image = image
     add.description = description
